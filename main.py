@@ -41,14 +41,20 @@ if __name__ == '__main__':
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    csv_file = 'wszystkie_kraje_swiata.csv'
+    csv_file = 'wszystkie_kraje_swiat.csv'
 
 
     countries = kraje()
     info = informacje(countries)
 
-    plik_csv = open(csv_file, mode='w',  encoding='utf-8')
-    writer = csv.writer(plik_csv)
+    plik_csv = open(csv_file, mode='w',  encoding='utf-8', newline='')
+    # tu bedzie się róznić w zalezności od tego gdzie
+    #chemy otwierać plik gdy w exccelu to musmy ustwic rozdielannie na ";"
+    #a gdy w libra office to ","
+    #excel
+    writer = csv.writer(plik_csv, delimiter=';')
+    #libre office
+    #writer = csv.writer(plik_csv, delimiter=',')
 
     writer.writerow(["Kraj", "Info"])
 
